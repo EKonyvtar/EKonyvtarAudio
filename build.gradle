@@ -41,8 +41,9 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google() // Google's Maven repository
+        jcenter()
+        jcenter {url 'https://firebase.bintray.com/gradle'}
         maven {
             url 'https://maven.google.com/'
         }
