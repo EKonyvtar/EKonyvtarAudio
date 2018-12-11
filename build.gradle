@@ -29,7 +29,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.2.1'
 
         //Firebase
-        classpath 'com.google.gms:google-services:4.0.0'
+        classpath 'com.google.gms:google-services:4.2.0' // google-services plugin
 
         //Crashlytics
         classpath 'io.fabric.tools:gradle:1.25.4'
@@ -42,6 +42,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google() // Google's Maven repository
         maven {
             url 'https://maven.google.com/'
         }
