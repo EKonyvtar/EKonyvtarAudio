@@ -19,6 +19,7 @@ import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -37,7 +38,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.murati.oszk.audiobook.OfflineBookService;
 import com.murati.oszk.audiobook.R;
@@ -282,10 +287,10 @@ public class MusicPlayerActivity extends BaseActivity
     }
 
     protected void initializeFromParams(Bundle savedInstanceState, Intent intent) {
-      String mediaId = null;
+        String mediaId = null;
 
-      String action = intent.getAction();
-      Bundle extras = intent.getExtras();
+        String action = intent.getAction();
+        Bundle extras = intent.getExtras();
 
       if (action != null) {
         switch (action) {
@@ -306,6 +311,27 @@ public class MusicPlayerActivity extends BaseActivity
               LogHelper.d(TAG, "MediaId fetched=", mediaId);
               break;
 
+            case Intent.ACTION_OPEN_DOCUMENT:
+                FirebaseDynamicLinks.getInstance()
+                    .getDynamicLink(getIntent())
+                    .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                        @Override
+                        public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                            // Get deep link from result (may be null if no link is found)
+                            Uri deepLink = null;
+                            if (pendingDynamicLinkData != null) {
+                                deepLink = pendingDynamicLinkData.getLink();
+                            }
+
+                            Toast.makeText(getApplicationContext(), "Got it!", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(this, new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "getDynamicLink:onFailure", e);
+                        }
+                    });
           case Intent.ACTION_MAIN:
           default:
               break;

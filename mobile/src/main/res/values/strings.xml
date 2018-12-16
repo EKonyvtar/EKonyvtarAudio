@@ -64,6 +64,9 @@
     <string name="notification_favorite_added">Hozzáadva a Kedvencekhez</string>
     <string name="notification_favorite_removed">Eltávolítva a Kedvencekből</string>
 
+    <!-- Share -->
+    <string name="action_share">Megosztás</string>
+
     <!-- Download -->
     <string name="action_download">Letöltés</string>
     <string name="notification_download">Letöltés a háttérben</string>

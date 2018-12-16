@@ -95,6 +95,9 @@ dependencies {
     //Remote Config
     implementation 'com.google.firebase:firebase-config:16.1.2'
 
+    //Dynamic Links
+    implementation 'com.google.firebase:firebase-dynamic-links:16.1.5'
+
     // Test
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.15.0'
