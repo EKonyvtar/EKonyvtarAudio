@@ -36,6 +36,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 
+import com.flurry.android.FlurryAgent;
 import com.murati.oszk.audiobook.MusicService;
 import com.murati.oszk.audiobook.R;
 import com.murati.oszk.audiobook.utils.LanguageHelper;
@@ -61,6 +62,10 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        new FlurryAgent.Builder()
+            .withLogEnabled(true)
+            .build(this, "7T283T776Y8ZDZMVG5N4");
 
         LogHelper.d(TAG, "Activity onCreate");
         //LanguageHelper.setDefaultAppLocale(this);

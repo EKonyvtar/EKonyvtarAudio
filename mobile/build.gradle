@@ -95,6 +95,10 @@ dependencies {
     //Remote Config
     implementation 'com.google.firebase:firebase-config:16.1.2'
 
+
+    // Flurry
+    compile 'com.flurry.android:analytics:11.4.0@aar'
+
     // Test
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.15.0'
