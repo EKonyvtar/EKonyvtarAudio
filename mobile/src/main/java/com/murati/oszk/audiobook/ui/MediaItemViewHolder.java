@@ -17,6 +17,7 @@ package com.murati.oszk.audiobook.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -74,6 +75,7 @@ public class MediaItemViewHolder {
     private TextView mDescriptionView;
 
     private Button mDownloadButton;
+    private Button mShareButton;
     private Button mOpenButton;
     private ImageView mFavoriteButton;
 
@@ -215,6 +217,17 @@ public class MediaItemViewHolder {
                                         FavoritesHelper.toggleFavoriteWithText((String) v.getTag(), activity));
                                 }
                             });
+                        }
+
+                        //Share
+                        holder.mShareButton = (Button) convertView.findViewById(R.id.card_download);
+                        if (holder.mShareButton != null) {
+                            Intent sendIntent = new Intent();
+                            String msg = "Hey, check this out: "; //+ myDynamicLink;
+                            sendIntent.setAction(Intent.ACTION_SEND);
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                            sendIntent.setType("text/plain");
+                            //startActivity(sendIntent);
                         }
 
                         //holder.mOpenButton = (Button) convertView.findViewById(R.id.card_open);

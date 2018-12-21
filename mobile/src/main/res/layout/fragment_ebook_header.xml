@@ -94,7 +94,7 @@ https://stackoverflow.com/questions/30751870/can-one-use-cardview-for-listview-i
         >
 
         <Button
-            android:id="@+id/book_share"
+            android:id="@+id/card_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
