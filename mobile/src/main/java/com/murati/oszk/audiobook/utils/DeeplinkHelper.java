@@ -2,6 +2,10 @@ package com.murati.oszk.audiobook.utils;
 
 import android.net.Uri;
 
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
+
 public class DeeplinkHelper {
 
     // https://firebase.google.com/docs/dynamic-links/android/create?authuser=0

@@ -220,14 +220,20 @@ public class MediaItemViewHolder {
                         }
 
                         //Share
-                        holder.mShareButton = (Button) convertView.findViewById(R.id.card_download);
+                        holder.mShareButton = (Button) convertView.findViewById(R.id.card_share);
                         if (holder.mShareButton != null) {
-                            Intent sendIntent = new Intent();
-                            String msg = "Hey, check this out: "; //+ myDynamicLink;
-                            sendIntent.setAction(Intent.ACTION_SEND);
-                            sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
-                            sendIntent.setType("text/plain");
-                            //startActivity(sendIntent);
+                            holder.mShareButton.setTag(description.getMediaId());
+                            holder.mShareButton.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    Intent sendIntent = new Intent();
+                                    String msg = "Hey, check this out: " + v.getTag().toString(); //+ myDynamicLink;
+                                    sendIntent.setAction(Intent.ACTION_SEND);
+                                    sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                                    sendIntent.setType("text/plain");
+                                    activity.startActivity(sendIntent);
+
+                                }
+                            });
                         }
 
                         //holder.mOpenButton = (Button) convertView.findViewById(R.id.card_open);
