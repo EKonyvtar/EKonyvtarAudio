@@ -1,15 +1,21 @@
 package com.murati.oszk.audiobook.utils;
 
 import android.net.Uri;
+import android.support.v4.media.MediaMetadataCompat;
+import android.util.Log;
 
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
+import com.murati.oszk.audiobook.model.MusicProvider;
+import com.murati.oszk.audiobook.model.MusicProviderSource;
+
+import java.io.File;
 
 public class DeeplinkHelper {
+    private static final String TAG = LogHelper.makeLogTag(DeeplinkHelper.class);
 
     // https://firebase.google.com/docs/dynamic-links/android/create?authuser=0
-
 
     public static void generateDeeplinkForBook(String book) {
         DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
@@ -24,7 +30,11 @@ public class DeeplinkHelper {
         Uri dynamicLinkUri = dynamicLink.getUri();
     }
 
-    public static String getMekLinkForBook(String ebook) {
-        return "";
+    public static String getMekLinkForBook(String mediaId) {
+        String book = MediaIDHelper.getCategoryValueFromMediaID(mediaId);
+        Iterable<MediaMetadataCompat> tracks = MusicProvider.getTracksByEbook(book);
+        MediaMetadataCompat first = tracks.iterator().next();
+        //TODO fix to filesource
+        return first.getDescription().getIconUri().toString();
     }
 }

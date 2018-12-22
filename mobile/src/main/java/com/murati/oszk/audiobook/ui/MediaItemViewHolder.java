@@ -57,6 +57,8 @@ import com.murati.oszk.audiobook.utils.LogHelper;
 import com.murati.oszk.audiobook.utils.MediaIDHelper;
 import com.murati.oszk.audiobook.utils.NetworkHelper;
 
+import static com.murati.oszk.audiobook.utils.DeeplinkHelper.getMekLinkForBook;
+
 
 public class MediaItemViewHolder {
     private static final String TAG = LogHelper.makeLogTag(MediaItemViewHolder.class);
@@ -226,12 +228,11 @@ public class MediaItemViewHolder {
                             holder.mShareButton.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
                                     Intent sendIntent = new Intent();
-                                    String msg = "Hey, check this out: " + v.getTag().toString(); //+ myDynamicLink;
+                                    String msg = "Hey, check this out: " + getMekLinkForBook(v.getTag().toString()); //+ myDynamicLink;
                                     sendIntent.setAction(Intent.ACTION_SEND);
                                     sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
                                     sendIntent.setType("text/plain");
                                     activity.startActivity(sendIntent);
-
                                 }
                             });
                         }
