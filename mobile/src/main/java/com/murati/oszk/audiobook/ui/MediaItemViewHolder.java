@@ -19,11 +19,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.MediaBrowserCompat;
@@ -34,30 +32,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.murati.oszk.audiobook.OfflineBookService;
 import com.murati.oszk.audiobook.R;
-import com.murati.oszk.audiobook.model.MusicProvider;
 import com.murati.oszk.audiobook.utils.FavoritesHelper;
 import com.murati.oszk.audiobook.utils.LogHelper;
 import com.murati.oszk.audiobook.utils.MediaIDHelper;
-import com.murati.oszk.audiobook.utils.NetworkHelper;
 
-import static com.murati.oszk.audiobook.utils.DeeplinkHelper.getMekLinkForBook;
+import static com.murati.oszk.audiobook.utils.DeeplinkHelper.getMekLinkForMediaId;
 
 
 public class MediaItemViewHolder {
@@ -228,7 +218,7 @@ public class MediaItemViewHolder {
                             holder.mShareButton.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
                                     Intent sendIntent = new Intent();
-                                    String msg = "Hey, check this out: " + getMekLinkForBook(v.getTag().toString()); //+ myDynamicLink;
+                                    String msg = "Hey, check this out: " + getMekLinkForMediaId(v.getTag().toString()); //+ myDynamicLink;
                                     sendIntent.setAction(Intent.ACTION_SEND);
                                     sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
                                     sendIntent.setType("text/plain");

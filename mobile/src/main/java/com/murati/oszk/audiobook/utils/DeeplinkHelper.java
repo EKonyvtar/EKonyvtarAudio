@@ -14,6 +14,7 @@ import java.io.File;
 
 public class DeeplinkHelper {
     private static final String TAG = LogHelper.makeLogTag(DeeplinkHelper.class);
+    private static final String MEK_URL_REGEXP = "(.*(\\d{5,})[/](\\d{5,})).*";
 
     // https://firebase.google.com/docs/dynamic-links/android/create?authuser=0
 
@@ -30,11 +31,17 @@ public class DeeplinkHelper {
         Uri dynamicLinkUri = dynamicLink.getUri();
     }
 
-    public static String getMekLinkForBook(String mediaId) {
+    public static String getMekLinkForMediaId(String mediaId) {
         String book = MediaIDHelper.getCategoryValueFromMediaID(mediaId);
         Iterable<MediaMetadataCompat> tracks = MusicProvider.getTracksByEbook(book);
         MediaMetadataCompat first = tracks.iterator().next();
         //TODO fix to filesource
-        return first.getDescription().getIconUri().toString();
+
+        String urlString = first.getDescription().getIconUri().toString();
+        return urlString.replaceAll(MEK_URL_REGEXP, "$1");
+    }
+
+    public static String getMediaIdFromMekLink(String url) {
+        return "";
     }
 }
