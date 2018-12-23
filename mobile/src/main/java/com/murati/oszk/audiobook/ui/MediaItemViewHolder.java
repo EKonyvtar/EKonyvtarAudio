@@ -47,7 +47,7 @@ import com.murati.oszk.audiobook.utils.FavoritesHelper;
 import com.murati.oszk.audiobook.utils.LogHelper;
 import com.murati.oszk.audiobook.utils.MediaIDHelper;
 
-import static com.murati.oszk.audiobook.utils.DeeplinkHelper.getMekLinkForMediaId;
+import static com.murati.oszk.audiobook.utils.DeeplinkHelper.shareDeeplinkForMediaID;
 
 
 public class MediaItemViewHolder {
@@ -217,12 +217,7 @@ public class MediaItemViewHolder {
                             holder.mShareButton.setTag(description.getMediaId());
                             holder.mShareButton.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
-                                    Intent sendIntent = new Intent();
-                                    String msg = "Hey, check this out: " + getMekLinkForMediaId(v.getTag().toString()); //+ myDynamicLink;
-                                    sendIntent.setAction(Intent.ACTION_SEND);
-                                    sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
-                                    sendIntent.setType("text/plain");
-                                    activity.startActivity(sendIntent);
+                                    shareDeeplinkForMediaID(activity, v.getTag().toString()); //+ myDynamicLink;
                                 }
                             });
                         }
