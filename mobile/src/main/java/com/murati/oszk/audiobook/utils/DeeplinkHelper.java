@@ -71,6 +71,9 @@ public class DeeplinkHelper {
 
                     } else {
                         Toast.makeText(activity, "Cannot share book", Toast.LENGTH_LONG).show();
+                        createShareIntent(activity,
+                            "Hey, check this out: " + content_url); //+ myDynamicLink;
+
                         Exception ex = task.getException();
                         Log.e(TAG, "Error getting shortened link for " + content_url);
                         if (ex != null)
