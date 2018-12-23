@@ -67,12 +67,12 @@ public class DeeplinkHelper {
                         Uri flowchartLink = task.getResult().getPreviewLink();
 
                         createShareIntent(activity,
-                            "Hey, check this out: " + shortLink.toString()); //+ myDynamicLink;
+                            "Hey, check this out: " + shortLink.toString());
 
                     } else {
                         Toast.makeText(activity, "Cannot share book", Toast.LENGTH_LONG).show();
                         createShareIntent(activity,
-                            "Hey, check this out: " + content_url); //+ myDynamicLink;
+                            "Hey, check this out: " + content_url);
 
                         Exception ex = task.getException();
                         Log.e(TAG, "Error getting shortened link for " + content_url);
