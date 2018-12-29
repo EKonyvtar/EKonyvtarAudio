@@ -17,7 +17,6 @@ package com.murati.oszk.audiobook.ui;
 
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,10 +47,10 @@ import com.murati.oszk.audiobook.OfflineBookService;
 import com.murati.oszk.audiobook.R;
 import com.murati.oszk.audiobook.utils.AdHelper;
 import com.murati.oszk.audiobook.utils.AnalyticsHelper;
+import com.murati.oszk.audiobook.utils.DeeplinkHelper;
 import com.murati.oszk.audiobook.utils.FavoritesHelper;
 import com.murati.oszk.audiobook.utils.LogHelper;
 import com.murati.oszk.audiobook.utils.MediaIDHelper;
-import com.murati.oszk.audiobook.utils.PlaybackHelper;
 
 /**
  * Main activity for the music player.
@@ -298,6 +297,9 @@ public class MusicPlayerActivity extends BaseActivity
         String action = intent.getAction();
         Bundle extras = intent.getExtras();
 
+        Uri applink = intent.getData();
+        Log.v(TAG, "Applink Uri fetched="+ applink);
+
       if (action != null) {
         switch (action) {
           case Intent.ACTION_SEARCH:
@@ -312,9 +314,15 @@ public class MusicPlayerActivity extends BaseActivity
             break;
 
           case Intent.ACTION_VIEW:
-              if (extras != null)
+              if (extras != null) {
                   mediaId = extras.getString(MediaIDHelper.EXTRA_MEDIA_ID_KEY);
-              LogHelper.d(TAG, "MediaId fetched=", mediaId);
+                  LogHelper.v(TAG, "MediaId fetched=", mediaId);
+              }
+
+              else if (applink != null ) {
+                  Log.v(TAG, "VIEW Applink Uri fetched="+ applink);
+                  mediaId = DeeplinkHelper.getMediaIdFromUri(applink.toString());
+              }
               break;
 
             case Intent.ACTION_OPEN_DOCUMENT:

@@ -92,7 +92,12 @@ public class DeeplinkHelper {
         return urlString.replaceAll(MEK_URL_REGEXP, "$1");
     }
 
-    public static String getMediaIdFromMekLink(String url) {
-        return "";
+    public static String getMediaIdFromUri(String uri) {
+        if (uri.matches(DYNAMIC_LINK_URL)) {
+            Log.v(TAG, "Dynamic Link resolver triggered");
+        } else {
+            Log.v(TAG, "MEK resolver triggered");
+        }
+        return null;
     }
 }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2014 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,7 @@
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.murati.oszk.audiobook" >
+    package="com.murati.oszk.audiobook">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -43,7 +42,7 @@
         android:theme="@style/UAmpAppTheme"
         android:banner="@drawable/banner_tv">
 
-        <service android:name=".OfflineBookService"/>
+        <service android:name=".OfflineBookService" />
 
         <meta-data
             android:name="com.google.android.gms.car.application"
@@ -56,7 +55,7 @@
         <!-- ADMOB App ID -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admob_app_id"/>
+            android:value="@string/admob_app_id" />
 
         <!-- Main activity for music browsing on phone -->
         <activity
@@ -68,58 +67,61 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:host="mek.oszk.hu" android:scheme="http"/>
-                <data android:host="mek.oszk.hu" android:scheme="https"/>
-            </intent-filter>
-
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data android:host="ekonyvtar.page.link" android:scheme="http"/>
-                <data android:host="ekonyvtar.page.link" android:scheme="https"/>
-            </intent-filter>
-
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
 
             <!-- Use this intent filter to get voice searches, like "Play Ábel a rengetegben" -->
             <intent-filter>
                 <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="ekonyvtar.page.link"
+                    android:pathPattern="/media" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="mek.oszk.hu"
+                    android:pathPattern="/.*" />
+            </intent-filter>
         </activity>
 
         <!-- Placeholder activity for phone settings -->
         <activity
             android:name="com.murati.oszk.audiobook.ui.SettingsActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
 
         <!-- Placeholder activity for About page -->
         <activity
             android:name="com.murati.oszk.audiobook.ui.AboutActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
 
         <!-- Proxy activity that opens either the NowPlaying TV or the mobile UI, depending on
         the current environment -->
         <activity
             android:name="com.murati.oszk.audiobook.ui.NowPlayingActivity"
-            android:icon="@drawable/ic_launcher">
-        </activity>
+            android:icon="@drawable/ic_launcher"></activity>
 
         <!-- Main activity for Android TV user interface -->
         <activity
             android:name="com.murati.oszk.audiobook.ui.tv.TvBrowseActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.UAmp.TVLeanback" >
+            android:theme="@style/Theme.UAmp.TVLeanback">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
@@ -193,14 +195,14 @@
             android:parentActivityName="com.murati.oszk.audiobook.ui.MusicPlayerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.murati.oszk.audiobook.ui.MusicPlayerActivity"/>
+                android:value="com.murati.oszk.audiobook.ui.MusicPlayerActivity" />
         </activity>
 
         <!-- A receiver that will receive media buttons and send as
             intents to your MediaBrowserServiceCompat implementation.
             Required on pre-Lollipop. More information at
             http://developer.android.com/reference/android/support/v4/media/session/MediaButtonReceiver.html -->
-        <receiver android:name="android.support.v4.media.session.MediaButtonReceiver" >
+        <receiver android:name="android.support.v4.media.session.MediaButtonReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
