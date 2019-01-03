@@ -43,6 +43,9 @@ public class RemoteJSONSource extends Activity implements MusicProviderSource {
 
     private static final String TAG = LogHelper.makeLogTag(RemoteJSONSource.class);
 
+    //TODO: refactor
+    // https://stackoverflow.com/questions/6277154/populate-listview-from-json/8113337#8113337
+
     protected static final String CATALOG_URL =
             "https://s3.amazonaws.com/murati/ekonyvtar_remote.json";
 

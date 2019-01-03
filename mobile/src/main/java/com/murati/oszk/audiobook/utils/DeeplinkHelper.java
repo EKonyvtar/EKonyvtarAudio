@@ -14,11 +14,14 @@ import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
+import com.murati.oszk.audiobook.MusicService;
 import com.murati.oszk.audiobook.model.MusicProvider;
 import com.murati.oszk.audiobook.model.MusicProviderSource;
 import com.murati.oszk.audiobook.ui.MusicPlayerActivity;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DeeplinkHelper {
     private static final String TAG = LogHelper.makeLogTag(DeeplinkHelper.class);
@@ -92,11 +95,23 @@ public class DeeplinkHelper {
         return urlString.replaceAll(MEK_URL_REGEXP, "$1");
     }
 
-    public static String getMediaIdFromUri(String uri) {
-        if (uri.matches(DYNAMIC_LINK_URL)) {
-            Log.v(TAG, "Dynamic Link resolver triggered");
-        } else {
-            Log.v(TAG, "MEK resolver triggered");
+    public static String getMekIdFromUri(String uri) {
+        try {
+            if (uri.matches(DYNAMIC_LINK_URL)) {
+                //Log.v(TAG, "Dynamic Link resolver, skipping for now.");
+                return null;
+            } else {
+                //Log.v(TAG, "MEK resolver triggered");
+                Pattern p = Pattern.compile(MEK_URL_REGEXP);
+                Matcher m = p.matcher(uri);
+                if (m.matches()) {
+                    String mekID = m.group(3);
+                    return  mekID;
+                }
+
+            }
+        } catch (Exception ex) {
+            //NOOP, return null if there's an error
         }
         return null;
     }

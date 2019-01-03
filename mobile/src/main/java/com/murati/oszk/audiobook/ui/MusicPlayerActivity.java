@@ -321,31 +321,33 @@ public class MusicPlayerActivity extends BaseActivity
 
               else if (applink != null ) {
                   Log.v(TAG, "VIEW Applink Uri fetched="+ applink);
-                  mediaId = DeeplinkHelper.getMediaIdFromUri(applink.toString());
+                  String mekId = DeeplinkHelper.getMekIdFromUri(applink.toString());
+                  mediaId = MediaIDHelper.createMediaID(mekId, MediaIDHelper.MEDIA_ID_BY_SEARCH);
+
+                  /*if (mediaId == null) {
+                      FirebaseDynamicLinks.getInstance()
+                          .getDynamicLink(getIntent())
+                          .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                              @Override
+                              public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                                  // Get deep link from result (may be null if no link is found)
+                                  Uri deepLink = null;
+                                  if (pendingDynamicLinkData != null) {
+                                      deepLink = pendingDynamicLinkData.getLink();
+                                  }
+
+                                  Toast.makeText(getApplicationContext(), "Got it!", Toast.LENGTH_LONG).show();
+                              }
+                          })
+                          .addOnFailureListener(this, new OnFailureListener() {
+                              @Override
+                              public void onFailure(@NonNull Exception e) {
+                                  Log.w(TAG, "getDynamicLink:onFailure", e);
+                              }
+                          });
+                  }*/
               }
               break;
-
-            case Intent.ACTION_OPEN_DOCUMENT:
-                FirebaseDynamicLinks.getInstance()
-                    .getDynamicLink(getIntent())
-                    .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
-                        @Override
-                        public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                            // Get deep link from result (may be null if no link is found)
-                            Uri deepLink = null;
-                            if (pendingDynamicLinkData != null) {
-                                deepLink = pendingDynamicLinkData.getLink();
-                            }
-
-                            Toast.makeText(getApplicationContext(), "Got it!", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnFailureListener(this, new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "getDynamicLink:onFailure", e);
-                        }
-                    });
           case Intent.ACTION_MAIN:
           default:
               break;
