@@ -113,6 +113,7 @@ allprojects {
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
             options.compilerArgs << "-Xlint:unchecked" // << "-Xlint:deprecation"
+            //options.compilerArgs << "-Pandroid.debug.obsoleteApi=true" // variant.getExternalNativeBuildTasks()
         }
     }
 }

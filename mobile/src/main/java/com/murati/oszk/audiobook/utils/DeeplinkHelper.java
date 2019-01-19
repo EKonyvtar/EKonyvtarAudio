@@ -111,7 +111,7 @@ public class DeeplinkHelper {
 
             }
         } catch (Exception ex) {
-            //NOOP, return null if there's an error
+            //NOOP, return null if there's an error, but not from catch.
         }
         return null;
     }
